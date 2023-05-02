@@ -42,12 +42,12 @@ void processInput(void* param) {
         vTaskDelay(10 / portTICK_PERIOD_MS);        // wait for all messages to arrive
         while (Serial.available()) {                // read letters
             char c = Serial.read();
-            if(c == '\r' || c == '\n'){
-                inputString[inputIndex] = '\0';
-                inputIndex = 0;
-                inputComplete = true;
+            if(c == '\r' || c == '\n'){             // exit on carriage return or newline
+                inputString[inputIndex] = '\0';     // terminate string
+                inputIndex = 0;                     // reset index
+                inputComplete = true;               // set flag
             } 
-            else if(inputIndex < CLI_BUF_SIZE - 1){
+            else if(inputIndex < CLI_BUF_SIZE - 1){ // append data to buffer if it still has space left
                 inputString[inputIndex++] = c;
             }
             
