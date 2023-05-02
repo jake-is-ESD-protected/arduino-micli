@@ -53,10 +53,8 @@ void processInput(void* param) {
             
         }
         if(inputComplete){
-            char* command = strtok(inputString, " ");       // look for arguments seperated by whitespaces
+            char* command = strtok(inputString, " ");
             if (command != NULL) {
-
-                // YOUR STUFF GOES HERE:
 
                 // button command
                 if(strcmp(command, "button") == 0){
@@ -79,9 +77,7 @@ void processInput(void* param) {
                         }
                         // warn user about not specifying an argument
                         else{
-                            Serial.print("Unknown argument <");
-                            Serial.print(arg);
-                            Serial.println(">. Use <on> or <off>.");
+                            Serial.printf("Unknown argument <%s>. Use <on> or <off>\r\n.", arg);
                         }
                     }
                     // warn user about an unknown argument
@@ -91,9 +87,7 @@ void processInput(void* param) {
                 }
                 // warn user about unknown command
                 else{
-                    Serial.print("Unknown command <");
-                    Serial.print(command);
-                    Serial.print(">\r\n");
+                    Serial.printf("Unknown command <%s>\r\n", command);
                 }
             }
             // reset flag
