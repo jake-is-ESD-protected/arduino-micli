@@ -1,7 +1,8 @@
 #include <Arduino.h>
+#include "cli.h"
 
 void setup() {
-  // put your setup code here, to run once:
+  initCLI(115200);
 }
 
 void loop() {
