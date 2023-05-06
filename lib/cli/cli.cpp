@@ -56,8 +56,14 @@ void processInput(void* param) {
             char* command = strtok(inputString, " ");
             if (command != NULL) {
 
+                // help command
+                if(strcmp(command, "help") == 0){
+                    Serial.println("commands available:");
+                    Serial.println("\t<button>\t\ttoggle the virtual button");
+                    Serial.println("\t<switch> <on> <off>\tturn virtual switch on or off");
+                }
                 // button command
-                if(strcmp(command, "button") == 0){
+                else if(strcmp(command, "button") == 0){
                     Serial.println("BUTTON service routine");
                     // toggle a GPIO or whatever...
                 }
