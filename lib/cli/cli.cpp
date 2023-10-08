@@ -22,12 +22,12 @@ void serialISR(void) {
 
 // helper function
 void printBootMessage(void){
-    Serial.println("\n***********\n\rCLI ready.\n\r***********\n\r");
+    Serial.println(BOOT_MSG);
 }
 
 // helper function
 void printCLIHead(void){
-    Serial.print("mini-CLI0.1 $ ");
+    Serial.print(CLI_HEADER);
 }
 
 // processing task (waits for input)
