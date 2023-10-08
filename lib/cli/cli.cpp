@@ -53,53 +53,57 @@ void processInput(void* param) {
             
         }
         if(inputComplete){
-            char* command = strtok(inputString, " ");
-            if (command != NULL) {
-
-                // help command
-                if(strcmp(command, "help") == 0){
-                    Serial.println("commands available:");
-                    Serial.println("\t<button>\t\ttoggle the virtual button");
-                    Serial.println("\t<switch> <on> <off>\tturn virtual switch on or off");
-                }
-                // button command
-                else if(strcmp(command, "button") == 0){
-                    Serial.println("BUTTON service routine");
-                    // toggle a GPIO or whatever...
-                }
-                // switch command
-                else if(strcmp(command, "switch") == 0){
-                    char* arg = strtok(NULL, " ");
-                    if(arg != NULL){
-                        // switch on command
-                        if(strcmp(arg, "on") == 0){
-                           Serial.println("SWITCH ON service routine");
-                           // toggle a GPIO or whatever...
-                        }
-                        // switch off command
-                        else if(strcmp(arg, "off") == 0){
-                            Serial.println("SWITCH OFF service routine");
-                            // toggle a GPIO or whatever...
-                        }
-                        // warn user about not specifying an argument
-                        else{
-                            Serial.printf("Unknown argument <%s>. Use <on> or <off>\r\n.", arg);
-                        }
-                    }
-                    // warn user about an unknown argument
-                    else{
-                        Serial.println("Missing argument. Use <on> or <off>.");
-                    }
-                }
-                // warn user about unknown command
-                else{
-                    Serial.printf("Unknown command <%s>\r\n", command);
-                }
-            }
+            parseInput(inputString);
             // reset flag
             inputComplete = false;
             printCLIHead();
             attachInterrupt(digitalPinToInterrupt(RX_PIN), serialISR, FALLING);
+        }
+    }
+}
+
+void parseInput(char* input_string){
+    char* command = strtok(input_string, " ");
+    if (command != NULL) {
+
+        // help command
+        if(strcmp(command, "help") == 0){
+            Serial.println("commands available:");
+            Serial.println("\t<button>\t\ttoggle the virtual button");
+            Serial.println("\t<switch> <on> <off>\tturn virtual switch on or off");
+        }
+        // button command
+        else if(strcmp(command, "button") == 0){
+            Serial.println("BUTTON service routine");
+            // toggle a GPIO or whatever...
+        }
+        // switch command
+        else if(strcmp(command, "switch") == 0){
+            char* arg = strtok(NULL, " ");
+            if(arg != NULL){
+                // switch on command
+                if(strcmp(arg, "on") == 0){
+                    Serial.println("SWITCH ON service routine");
+                    // toggle a GPIO or whatever...
+                }
+                // switch off command
+                else if(strcmp(arg, "off") == 0){
+                    Serial.println("SWITCH OFF service routine");
+                    // toggle a GPIO or whatever...
+                }
+                // warn user about not specifying an argument
+                else{
+                    Serial.printf("Unknown argument <%s>. Use <on> or <off>\r\n.", arg);
+                }
+            }
+            // warn user about an unknown argument
+            else{
+                Serial.println("Missing argument. Use <on> or <off>.");
+            }
+        }
+        // warn user about unknown command
+        else{
+            Serial.printf("Unknown command <%s>\r\n", command);
         }
     }
 }

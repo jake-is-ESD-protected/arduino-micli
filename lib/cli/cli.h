@@ -11,6 +11,7 @@
 void initCLI(uint32_t baudrate);
 void serialISR(void);
 void processInput(void* param);
+void parseInput(char* input_string);
 void printBootMessage(void);
 void printCLIHead(void);
 
